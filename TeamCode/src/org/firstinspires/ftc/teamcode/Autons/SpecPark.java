@@ -43,7 +43,7 @@ public class SpecPark extends LinearOpMode {
             //get specific distance while moving at a slower pace
 
             sleep(5000);
-            telemetry.addData(">>>back distance:", robot.backDistance.getDistance());
+            telemetry.addData("back distance:", robot.backDistance.getDistance());
             telemetry.update();
 
             while (robot.backDistance.isDistanceLess(63) && opModeIsActive()) {

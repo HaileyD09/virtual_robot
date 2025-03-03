@@ -1,9 +1,9 @@
-package org.firstinspires.ftc.teamcode.ArmLift;
+package org.firstinspires.ftc.teamcode.wildbots25.ArmLift;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
-import org.firstinspires.ftc.teamcode.ArmLift.Enums.MotorState;
+import org.firstinspires.ftc.teamcode.wildbots25.ArmLift.Enums.MotorState;
 
 public class GenericLiftMotor {
 

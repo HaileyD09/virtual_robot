@@ -48,6 +48,8 @@ public class HardwareMap implements Iterable<HardwareDevice>{
      */
     public final DeviceMapping<DcMotor> dcMotor = new DeviceMapping<>(DcMotor.class);
 
+    public final DeviceMapping<DcMotorEx> dcMotorEx = new DeviceMapping<>(DcMotorEx.class);
+
     /**
      * Map of all ColorSensor devices in this HardwareMap.
      */
@@ -113,6 +115,7 @@ public class HardwareMap implements Iterable<HardwareDevice>{
         list.add(device);
         allDevicesList.add(device);
         if (device instanceof DcMotor) dcMotor.put(deviceName, (DcMotor)device);
+        if (device instanceof DcMotorEx) dcMotorEx.put(deviceName, (DcMotorEx)device);
         if (device instanceof ColorSensor) colorSensor.put(deviceName, (ColorSensor)device);
         if (device instanceof GyroSensor) gyroSensor.put(deviceName, (GyroSensor)device);
         if (device instanceof Servo) servo.put(deviceName, (Servo)device);
@@ -162,7 +165,7 @@ public class HardwareMap implements Iterable<HardwareDevice>{
     }
 
 
-    private synchronized <T> T tryGet(Class<? extends T> classOrInterface, String deviceName){
+    public synchronized <T> T tryGet(Class<? extends T> classOrInterface, String deviceName){
         if (!active){
             System.out.println("ERROR: Cannot obtain references to hardware before INIT button is pressed.");
             return null;

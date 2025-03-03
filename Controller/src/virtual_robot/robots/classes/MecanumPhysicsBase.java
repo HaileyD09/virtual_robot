@@ -5,10 +5,7 @@ import com.qualcomm.hardware.bosch.BNO055IMUNew;
 import com.qualcomm.hardware.digitalchickenlabs.OctoQuadImpl;
 import com.qualcomm.hardware.sparkfun.SparkFunOTOS;
 import com.qualcomm.hardware.sparkfun.SparkFunOTOSInternal;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.DcMotorExImpl;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.*;
 import com.qualcomm.robotcore.hardware.configuration.MotorType;
 import javafx.scene.input.MouseEvent;
 import org.dyn4j.dynamics.Body;
@@ -158,8 +155,19 @@ public abstract class MecanumPhysicsBase extends VirtualBot {
         hardwareMap.put("imu", new BNO055IMUImpl(this, 10));
         hardwareMap.put("imu", new BNO055IMUNew(this, 10));
         hardwareMap.put("color_sensor", controller.new ColorSensorImpl());
+        hardwareMap.put("rightCol", controller.new ColorSensorImpl());
+        hardwareMap.put("leftCol", controller.new ColorSensorImpl());
         hardwareMap.put("sensor_otos", new SparkFunOTOSInternal());
         hardwareMap.put("octoquad", new OctoQuadImpl());
+
+        hardwareMap.put("cascadeMotor", new DcMotorExImpl(MOTOR_TYPE, motorController0, 4));
+        hardwareMap.put("drawbridge", new DcMotorExImpl(MOTOR_TYPE, motorController0, 5));
+        hardwareMap.put("servo", new CRServoImpl(10));
+        hardwareMap.put("topLiftLimit", new DigitalChannelImpl());
+        hardwareMap.put("bottomLiftLimit", new DigitalChannelImpl());
+        hardwareMap.put("topDrawLimit", new DigitalChannelImpl());
+        hardwareMap.put("botDrawLimit", new DigitalChannelImpl());
+
     }
 
     /**

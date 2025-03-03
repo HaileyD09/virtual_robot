@@ -1,18 +1,18 @@
-package org.firstinspires.ftc.teamcode.Sensors;
+package org.firstinspires.ftc.teamcode.wildbots25.Sensors;
 
-import com.qualcomm.robotcore.hardware.TouchSensor;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
 
-import org.firstinspires.ftc.teamcode.ArmLift.GenericLiftMotor;
+import org.firstinspires.ftc.teamcode.wildbots25.ArmLift.GenericLiftMotor;
 
 public class DoubleLimitMotor {
-    private TouchSensor topLimit;
-    private TouchSensor bottomLimit;
+    private DigitalChannel topLimit;
+    private DigitalChannel bottomLimit;
 
     public final GenericLiftMotor motor;
 
     private boolean isReversed = false;
 
-    public DoubleLimitMotor(TouchSensor topLimit, TouchSensor bottomLimit, GenericLiftMotor motor) {
+    public DoubleLimitMotor(DigitalChannel topLimit, DigitalChannel bottomLimit, GenericLiftMotor motor) {
         this.topLimit = topLimit;
         this.bottomLimit = bottomLimit;
         this.motor  = motor;
@@ -22,8 +22,8 @@ public class DoubleLimitMotor {
     {
         this.isReversed = reversed;
     }
-    public boolean isUpperHit() {return topLimit.isPressed();}
-    public boolean isBottomHit() {return bottomLimit.isPressed();}
+    public boolean isUpperHit() {return !topLimit.getState();}
+    public boolean isBottomHit() {return !bottomLimit.getState();}
 
     /**
      * assuming that when input is -1 it goes up

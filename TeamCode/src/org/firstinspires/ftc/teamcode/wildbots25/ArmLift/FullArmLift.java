@@ -1,9 +1,9 @@
-package org.firstinspires.ftc.teamcode.ArmLift;
+package org.firstinspires.ftc.teamcode.wildbots25.ArmLift;
 
-import org.firstinspires.ftc.teamcode.Sensors.DoubleLimitMotor;
+import org.firstinspires.ftc.teamcode.wildbots25.Sensors.DoubleLimitMotor;
 
 import com.qualcomm.robotcore.hardware.CRServo;
-import com.qualcomm.robotcore.hardware.TouchSensor;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 public class FullArmLift {
@@ -16,10 +16,10 @@ public class FullArmLift {
     public FullArmLift(DcMotorEx cascadeMotor,
                        DcMotorEx drawbridgeMotor,
                        CRServo clawServo,
-                       TouchSensor topLiftLimit,
-                       TouchSensor botLiftLimit,
-                       TouchSensor topDrawLimit,
-                       TouchSensor botDrawLimit) {
+                       DigitalChannel topLiftLimit,
+                       DigitalChannel botLiftLimit,
+                       DigitalChannel topDrawLimit,
+                       DigitalChannel botDrawLimit) {
         claw = new Claw(clawServo);
         cascade = new DoubleLimitMotor(botLiftLimit, topLiftLimit, new GenericLiftMotor(cascadeMotor,0.8, 200));
         drawBridge = new DoubleLimitMotor(topDrawLimit, botDrawLimit, new GenericLiftMotor(drawbridgeMotor, 0.8, 200));

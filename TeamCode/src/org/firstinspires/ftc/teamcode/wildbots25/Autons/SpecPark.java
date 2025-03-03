@@ -1,12 +1,13 @@
 
-package org.firstinspires.ftc.teamcode.Autons;
+package org.firstinspires.ftc.teamcode.wildbots25.Autons;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.ArmLift.Enums.ClawPosition;
-import org.firstinspires.ftc.teamcode.Robot;
-import org.firstinspires.ftc.teamcode.StrafeDrive;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
+import org.firstinspires.ftc.teamcode.wildbots25.ArmLift.Enums.ClawPosition;
+import org.firstinspires.ftc.teamcode.wildbots25.Robot;
+import org.firstinspires.ftc.teamcode.wildbots25.StrafeDrive;
 
 //Level 4 in Slideshow
 //@Disabled
@@ -21,6 +22,8 @@ public class SpecPark extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         robot = new Robot(this);
         driving = robot.driving;
+        robot.topLiftLim.setMode(DigitalChannel.Mode.INPUT);
+        robot.topDrawLim.setMode(DigitalChannel.Mode.INPUT);
 
         robot.fullLift.claw.moveClaw(ClawPosition.CLOSE);
 
@@ -28,7 +31,8 @@ public class SpecPark extends LinearOpMode {
 
         if (opModeIsActive()) {
 
-            while((!robot.topLiftLim.isPressed() || !robot.topDrawLim.isPressed())  && opModeIsActive()) {
+            while((robot.topLiftLim.getState() || robot.topDrawLim.getState())  && opModeIsActive()) {
+                telemetry.addData("fullLift", "go 1");
                 robot.fullLift.cascade.Go(1);
                 robot.fullLift.drawBridge.Go(1);
             }
@@ -39,12 +43,12 @@ public class SpecPark extends LinearOpMode {
             //get specific distance while moving at a slower pace
 
             sleep(5000);
-            telemetry.addData("back distance:", robot.backDistance.getDistance());
+            telemetry.addData(">>>back distance:", robot.backDistance.getDistance());
             telemetry.update();
 
             while (robot.backDistance.isDistanceLess(63) && opModeIsActive()) {
                 driving.vertical(.5);
-                telemetry.addData("back distance:", robot.backDistance.getDistance());
+                telemetry.addData("===back distance:", robot.backDistance.getDistance());
                 telemetry.update();
             }
             driving.stop();
@@ -62,7 +66,7 @@ public class SpecPark extends LinearOpMode {
 
             while (robot.backDistance.isDistanceGreater(10)) {
                 driving.vertical(-0.5);
-                telemetry.addData("back distance:", robot.backDistance.getDistance());
+                telemetry.addData("<<<back distance:", robot.backDistance.getDistance());
                 telemetry.update();
             }
 

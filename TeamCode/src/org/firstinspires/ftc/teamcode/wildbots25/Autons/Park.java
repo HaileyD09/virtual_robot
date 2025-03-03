@@ -1,9 +1,9 @@
-package org.firstinspires.ftc.teamcode.Autons;
+package org.firstinspires.ftc.teamcode.wildbots25.Autons;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.Robot;
+import org.firstinspires.ftc.teamcode.wildbots25.Robot;
 
 //Level 1 Auton in Slideshow
 @Autonomous(name = "Close Park (red or blue)", group = "park")
@@ -21,7 +21,11 @@ public class Park extends LinearOpMode {
         if (opModeIsActive()) {
             robot.driving.vertical(0.5f);
             sleep(2000);
+
             while(!(robot.leftColor.redOrBlueTape() || robot.rightColor.redOrBlueTape())){
+                telemetry.addData("tap left color", robot.leftColor.redOrBlueTape());
+                telemetry.addData("tap right color", robot.rightColor.redOrBlueTape());
+
                 telemetry.addData("tape","not found");
                 telemetry.update();
                 robot.driving.turn(0.5);

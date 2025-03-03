@@ -1,8 +1,8 @@
-package org.firstinspires.ftc.teamcode.ArmLift;
+package org.firstinspires.ftc.teamcode.wildbots25.ArmLift;
 
 import com.qualcomm.robotcore.hardware.CRServo;
 
-import org.firstinspires.ftc.teamcode.ArmLift.Enums.ClawPosition;
+import org.firstinspires.ftc.teamcode.wildbots25.ArmLift.Enums.ClawPosition;
 
 public class Claw {
 

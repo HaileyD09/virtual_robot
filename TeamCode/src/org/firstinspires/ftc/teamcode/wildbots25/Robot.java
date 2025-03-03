@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.wildbots25;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
@@ -8,13 +8,14 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.CRServo;
-import com.qualcomm.robotcore.hardware.TouchSensor;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
 
-import org.firstinspires.ftc.teamcode.ArmLift.FullArmLift;
-import org.firstinspires.ftc.teamcode.ArmLift.GenericLiftMotor;
-import org.firstinspires.ftc.teamcode.Sensors.DoubleLimitMotor;
-import org.firstinspires.ftc.teamcode.Sensors.OurColorSensor;
-import org.firstinspires.ftc.teamcode.Sensors.OurDistanceSensor;
+import org.firstinspires.ftc.teamcode.wildbots25.ArmLift.FullArmLift;
+import org.firstinspires.ftc.teamcode.wildbots25.ArmLift.GenericLiftMotor;
+import org.firstinspires.ftc.teamcode.wildbots25.Sensors.DoubleLimitMotor;
+import org.firstinspires.ftc.teamcode.wildbots25.Sensors.OurColorSensor;
+import org.firstinspires.ftc.teamcode.wildbots25.Sensors.OurDistanceSensor;
+import virtual_robot.controller.VirtualRobotController;
 
 /**
  * In this file we:
@@ -50,10 +51,10 @@ public class Robot {
     private DistanceSensor leftDist;
     private ColorSensor rightCol;
     private ColorSensor leftCol;
-    public TouchSensor topLiftLim;
-    public TouchSensor bottomLiftLim;
-    public TouchSensor topDrawLim;
-    public TouchSensor botDrawLim;
+    public DigitalChannel topLiftLim;
+    public DigitalChannel bottomLiftLim;
+    public DigitalChannel topDrawLim;
+    public DigitalChannel botDrawLim;
 
     /**
      * itializtion of classes/objects
@@ -81,10 +82,10 @@ public class Robot {
         this.opMode = opMode;
 
         //wheels
-        rf = map.tryGet(DcMotor.class, "rf");
-        rb = map.tryGet(DcMotor.class, "rb");
-        lf = map.tryGet(DcMotor.class, "lf");
-        lb = map.tryGet(DcMotor.class, "lb");
+        rf = map.tryGet(DcMotor.class, "front_right_motor");
+        rb = map.tryGet(DcMotor.class, "back_right_motor");
+        lf = map.tryGet(DcMotor.class, "front_left_motor");
+        lb = map.tryGet(DcMotor.class, "back_left_motor");
 
         rf.setDirection(DcMotor.Direction.REVERSE);
         lb.setDirection(DcMotor.Direction.REVERSE);
@@ -98,16 +99,16 @@ public class Robot {
         cascadeMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
         //sensors
-        backDist = map.tryGet(DistanceSensor.class, "backDist");
-        rightDist = map.tryGet(DistanceSensor.class, "rightDist");
-        leftDist = map.tryGet(DistanceSensor.class, "leftDist");
+        backDist = map.tryGet(VirtualRobotController.DistanceSensorImpl.class, "back_distance");
+        rightDist = map.tryGet(VirtualRobotController.DistanceSensorImpl.class, "right_distance");
+        leftDist = map.tryGet(VirtualRobotController.DistanceSensorImpl.class, "left_distance");
         rightCol = map.tryGet(ColorSensor.class, "rightCol");
         leftCol = map.tryGet(ColorSensor.class, "leftCol");
 
-        topLiftLim = map.tryGet(TouchSensor.class, "topLiftLimit");
-        bottomLiftLim = map.tryGet(TouchSensor.class, "bottomLiftLimit");
-        topDrawLim = map.tryGet(TouchSensor.class, "topDrawLimit");
-        botDrawLim = map.tryGet(TouchSensor.class, "botDrawLimit");
+        topLiftLim = map.tryGet(DigitalChannel.class, "topLiftLimit");
+        bottomLiftLim = map.tryGet(DigitalChannel.class, "bottomLiftLimit");
+        topDrawLim = map.tryGet(DigitalChannel.class, "topDrawLimit");
+        botDrawLim = map.tryGet(DigitalChannel.class, "botDrawLimit");
 
         //sensor objects
         backDistance = new OurDistanceSensor(backDist);
